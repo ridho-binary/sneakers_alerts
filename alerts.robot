@@ -97,11 +97,11 @@ Verify current list in Footlocker site
     Wait until Element is visible            //*[@class="fl-category--productlist"]/div/div[*]//span[@class="fl-product-tile--name"]        60
     sleep       60
     scroll page to middle
-    Capture Page Screenshot                  my-jordan-list_fl_1.png
     scroll page to bottom
     sleep       30
     Execute javascript          document.body.style.zoom="33%"
-    Capture Page Screenshot
+    scroll page to top
+    Capture Page Screenshot          my-jordan-list_fl_1.png
 
     ${AJ_LIST}      get element count       //*[@class="fl-category--productlist"]/div/div[*]//span[@class="fl-product-tile--name"]
     run keyword if     ${AJ_LIST}!=22       Get latest release in Footlocker
