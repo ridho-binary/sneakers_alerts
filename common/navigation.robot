@@ -12,12 +12,12 @@ Go To Nike Site
     Chrome Headless
     Register Keyword To Run On Failure      NONE
     Go To   ${NIKE_LINK}
-    Set window size     1280    800
+    Set window size     1484    800
 
 
 Go To Footlocker Site
     Chrome Headless
     Register Keyword To Run On Failure      NONE
     go to       ${FL_LINK}
-    Set window size     1280    800
+    Set window size     1484    800
 
