@@ -1,0 +1,103 @@
+version: 2
+
+default: &default
+  docker:
+    - image: selenium/standalone-chrome
+  working_directory: ~/repo
+
+alias:
+  - &app_get
+    run:
+     name: install apt get
+     command: 'sudo apt-get update'
+
+  - &git_install
+    run:
+     name:  install git
+     command: 'sudo apt-get -y install git'
+
+  - &python_install
+    run:
+     name:  install python& libs
+     command: |
+       sudo apt-get install -y  libnss3 libgconf-2-4 python3.8 python3.8-dev python3.8-distutils python3.8-venv
+       sudo apt install -y python3-pip
+
+  - &install_pyyaml
+    run:
+     name: Install pip install pyyaml
+     command: 'sudo python3 -m pip install pyyaml'
+
+  - &rf_install
+    run:
+     name:  install robot framework
+     command: 'sudo python3 -m pip install robotframework'
+
+  - &selLib_install
+    run:
+     name:  install robot framework selenium library
+     command: 'sudo python3 -m pip install robotframework-seleniumlibrary'
+
+
+  - &install_RPALib
+    run:
+     name:  install RPA Library
+     command: 'sudo python3 -m pip install rpaframework '
+
+  - &create_dir
+    run:
+     name:  Create directory for reports
+     command: sudo mkdir /tmp/test-reports
+
+  - &runTest
+    run:
+     name:  Run Test
+     command: |
+       sudo chmod 777 /tmp/test-reports
+       export email_username=$email_username
+       export email_password=$email_password
+       export email_recipient=$email_recipient
+
+       robot  -d /tmp/test-reports  --loglevel WARN alerts.robot
+
+
+jobs:
+  alerts:
+    <<: *default
+    steps:
+      - checkout
+      - *app_get
+      - *git_install
+      - *python_install
+      - *rf_install
+      - *selLib_install
+      - *create_dir
+      - *install_pyyaml
+      - *install_RPALib
+      - *runTest
+      - store_test_results:
+          path: /tmp/test-reports
+      - store_artifacts:
+          path: /tmp/test-reports
+          destination: test-reports
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - alerts:
+        context:
+          - ridho-context
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "10,20,30,40,50 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - alerts:
+         context:
+           - ridho-context
