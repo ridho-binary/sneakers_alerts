@@ -19,3 +19,11 @@ Chrome Headless
     ${chrome_options}=    Set Chrome Options
     Create Webdriver    Chrome    chrome_options=${chrome_options}
 
+Scroll Page To Middle
+    Execute Javascript    window.scrollTo(0,document.body.scrollHeight/2);
+
+Scroll Page To Bottom
+    Execute Javascript    window.scrollTo(0,document.body.scrollHeight);
+
+Scroll Page To Top
+    Execute Javascript    window.scrollTo(0,0);
