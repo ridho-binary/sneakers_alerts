@@ -63,10 +63,10 @@ Send email alert Footlocker
 Check current available shoes in Nike
 
     Wait until Element is visible       //*[@class="product-card__body"]        60
-    Execute javascript          document.body.style.zoom="33%"
-    Capture Page Screenshot     my-jordan-list_1.png
-    ${TOTAL_CURRENT}    get element count   //*[@class="product-card__body"]
-    run keyword if     ${TOTAL_CURRENT}!=10       Get latest release in Nike
+    Execute javascript                   document.body.style.zoom="33%"
+    Capture Page Screenshot              my-jordan-list_1.png
+    ${TOTAL_CURRENT}                     get element count   //*[@class="product-card__body"]
+    run keyword if                       ${TOTAL_CURRENT}!=14       Get latest release in Nike
 
 
 Get latest release in Nike
