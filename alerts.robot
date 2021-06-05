@@ -66,7 +66,7 @@ Check current available shoes in Nike
     Execute javascript                   document.body.style.zoom="33%"
     Capture Page Screenshot              my-jordan-list_1.png
     ${TOTAL_CURRENT}                     get element count   //*[@class="product-card__body"]
-    run keyword if                       ${TOTAL_CURRENT}!=14       Get latest release in Nike
+    run keyword if                       ${TOTAL_CURRENT}!=11       Get latest release in Nike
 
 
 Get latest release in Nike
@@ -104,7 +104,7 @@ Verify current list in Footlocker site
     Capture Page Screenshot          my-jordan-list_fl_1.png
 
     ${AJ_LIST}      get element count       //*[@class="fl-category--productlist"]/div/div[*]//span[@class="fl-product-tile--name"]
-    run keyword if     ${AJ_LIST}!=22       Get latest release in Footlocker
+    run keyword if     ${AJ_LIST}!=21       Get latest release in Footlocker
 
 Get latest release in Footlocker
 
