@@ -78,7 +78,7 @@ Get latest release in Nike
     FOR    ${INDEX}    IN RANGE    1    ${NEW}+1
         ${passed}    Run Keyword And Return Status
         ...  Element Should Be Visible       //*[@id="Wall"]/div/div[5]/div[2]/main/section/div/div[${INDEX}]/div//*[@class="product-card__messaging accent--color" and text()=("Just In")]//following-sibling::div[@class='product-card__titles']
-        run keyword if     ${passed}        append to list     ${NEW_LIST1}       ${INDEX}
+        run keyword if     ${passed}==True        append to list     ${NEW_LIST1}       ${INDEX}
     END
 
 
@@ -90,7 +90,9 @@ Get latest release in Nike
     Remove Values From List     ${NEW_LIST2}   @{EXPECTED_LIST_NIKE}
     set global variable         ${NEW_LIST2}
 
-    send email alert nike
+    ${value}     Get Length	    ${NEW_LIST2}
+    run keyword if  ${value} != 0
+    ...  send email alert nike
 
 Verify current list in Footlocker site
 
